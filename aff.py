@@ -14,11 +14,13 @@ buttons = [gpio.Button(pin, pull_up=True) for pin in BUTTONS]  # Pull-down pour 
 
 # Charger les images statiques
 STATIC_IMAGES = [
-    pygame.image.load("img1.jpg"),
-    pygame.image.load("img2.jpg"),
-    pygame.image.load("img3.jpg"),
-    pygame.image.load("img4.jpg"),
-    pygame.image.load("img5.jpg")
+    pygame.image.load("images/Mapping.png"),
+    pygame.image.load("images/Bois.png"),
+    pygame.image.load("images/Rochers.png"),
+    pygame.image.load("images/Sculptures.png"),
+    pygame.image.load("images/ZoneBateau.png"),
+    pygame.image.load("images/ZoneFouille.png"),
+    pygame.image.load("images/BaseOrtho.png")
 ]
 
 # Liste des vidéos
