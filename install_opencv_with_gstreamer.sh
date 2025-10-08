@@ -11,7 +11,8 @@ sudo apt install -y build-essential cmake git pkg-config \
     libavcodec-dev libavformat-dev libswscale-dev \
     libxvidcore-dev libx264-dev \
     libjpeg-dev libpng-dev libtiff-dev \
-    gfortran openexr libatlas-base-dev \
+    gfortran openexr \ 
+	# libatlas-base-dev \
     python3-dev python3-numpy python3-pip \
     libgstreamer1.0-dev gstreamer1.0-plugins-base \
     gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly

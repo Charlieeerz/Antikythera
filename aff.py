@@ -1,4 +1,4 @@
-import RPi.GPIO as GPIO
+import gpiozero as gpio
 import pygame
 import cv2
 import time
@@ -9,18 +9,16 @@ screen_size = (1680, 1050)  # Taille de l'écran
 screen = pygame.display.set_mode(screen_size)
 
 # Initialisation des GPIO
-BUTTONS = [2,3,4,17,27]  
-GPIO.setmode(GPIO.BCM)
-for button in BUTTONS:
-    GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # Pull-down pour détecter le 3.3V
+BUTTONS = [2,3,4,17,27,22]  
+buttons = [gpio.Button(pin, pull_up=True) for pin in BUTTONS]  # Pull-down pour détecter le 3.3V
 
 # Charger les images statiques
 STATIC_IMAGES = [
-    pygame.image.load("image1.jpg"),
-    pygame.image.load("image2.jpg"),
-    pygame.image.load("image3.jpg"),
-    pygame.image.load("image4.jpg"),
-    pygame.image.load("image5.jpg")
+    pygame.image.load("img1.jpg"),
+    pygame.image.load("img2.jpg"),
+    pygame.image.load("img3.jpg"),
+    pygame.image.load("img4.jpg"),
+    pygame.image.load("img5.jpg")
 ]
 
 # Liste des vidéos
@@ -76,8 +74,6 @@ def play_video(video_path):
     cap.release()
 
 # Mapping des boutons : associer chaque bouton à une action
-# Les deux premiers boutons affichent des images statiques
-# Les trois suivants jouent des vidéos
 MAPPING = [
     {"type": "image", "data": STATIC_IMAGES[0]},
     {"type": "image", "data": STATIC_IMAGES[1]},
@@ -90,19 +86,25 @@ MAPPING = [
 try:
     print("Appuyez sur les boutons pour afficher des images ou des vidéos.")
     while True:
-        for i, button in enumerate(BUTTONS):
-            if GPIO.input(button) == GPIO.HIGH:  # Si le bouton est appuyé
+        any_pressed = False  # Variable pour vérifier si un bouton a été pressé
+
+        for i, button in enumerate(buttons):
+            if button.is_pressed:
+                any_pressed = True  # On note qu'un bouton a été pressé
                 action = MAPPING[i]
                 if action["type"] == "image":
-                    display_static_image(action["data"])  # Affiche une image statique
+                    display_static_image(action["data"])
                 elif action["type"] == "video":
-                    play_video(action["data"])  # Joue une vidéo
-                time.sleep(0.2)  # Délai pour éviter les déclenchements multiples
+                    play_video(action["data"])
+                time.sleep(0.2)  # Anti-rebond
+
+        if not any_pressed:
+            screen.fill((0, 0, 0))  # Aucun bouton pressé, on vide l'écran
+            pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 raise KeyboardInterrupt
 except KeyboardInterrupt:
     print("Programme arrêté.")
 finally:
-    GPIO.cleanup()
     pygame.quit()
