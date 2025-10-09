@@ -5,7 +5,9 @@ import time
 
 # Initialisation de pygame
 pygame.init()
-screen_size = (1680, 1050)  # Taille de l'écran
+#1680, 1050
+#1200,900 taille minoréess
+screen_size = (1250, 950) #Taille de l'écran
 screen = pygame.display.set_mode(screen_size)
 
 # Initialisation des GPIO
@@ -81,7 +83,8 @@ MAPPING = [
     {"type": "image", "data": STATIC_IMAGES[1]},
     {"type": "image", "data": STATIC_IMAGES[2]},
     {"type": "image", "data": STATIC_IMAGES[3]},
-    {"type": "image", "data": STATIC_IMAGES[4]}
+    {"type": "image", "data": STATIC_IMAGES[4]},
+    {"type": "image", "data": STATIC_IMAGES[5]}
 ]
 
 # Boucle principale
