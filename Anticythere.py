@@ -25,12 +25,12 @@ for i in range(64):  # de 0 à 63 inclus
 def switch_to_string(switchs):
     img_name=""
     for switch in switchs:
-        img_name+=str(switchs)
+        img_name+=str(switch)
     return img_name
 
 def switch_to_num(switchs):
     sum=0
-    for i in switchs:
+    for i in range(len(switchs)):
         sum+= 2**i * switchs[i]
     return sum
 
@@ -64,7 +64,7 @@ try:
             if button.is_pressed:
                 any_pressed = True  # On note qu'un bouton a été pressé
                 SWITCHS[i]=1
-                time.sleep(0.2)  # Anti-rebond
+                time.sleep(0.01)  # Anti-rebond
 
         num=switch_to_num(SWITCHS)
         display_static_image(STATIC_IMAGES[num])
