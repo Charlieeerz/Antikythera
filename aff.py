@@ -7,7 +7,7 @@ import time
 pygame.init()
 #1680, 1050
 #1200,900 taille minoréess
-screen_size = (1250, 950) #Taille de l'écran
+screen_size = (1260, 950) #Taille de l'écran
 screen = pygame.display.set_mode(screen_size)
 
 # Initialisation des GPIO
@@ -16,13 +16,12 @@ buttons = [gpio.Button(pin, pull_up=True) for pin in BUTTONS]  # Pull-down pour 
 
 # Charger les images statiques
 STATIC_IMAGES = [
-    pygame.image.load("images/Mapping.png"),
-    pygame.image.load("images/Bois.png"),
-    pygame.image.load("images/Rochers.png"),
-    pygame.image.load("images/Sculptures.png"),
-    pygame.image.load("images/ZoneBateau.png"),
-    pygame.image.load("images/ZoneFouille.png"),
-    pygame.image.load("images/BaseOrtho.png")
+    pygame.image.load("images0/100000.png"),
+    pygame.image.load("images0/010000.png"),
+    pygame.image.load("images0/001000.png"),
+    pygame.image.load("images0/000100.png"),
+    pygame.image.load("images0/000010.png"),
+    pygame.image.load("images0/000001.png")
 ]
 
 # Liste des vidéos
