@@ -6,7 +6,7 @@ import time
 pygame.init()
 #1680, 1050
 #1200,900 taille minoréess
-screen_size = (1260, 950) #Taille de l'écran
+screen_size = (1250, 950) #Taille de l'écran
 screen = pygame.display.set_mode(screen_size)
 
 # Initialisation des GPIO
@@ -15,7 +15,7 @@ buttons = [gpio.Button(pin, pull_up=True) for pin in BUTTONS]  # Pull-down pour 
 
 # Charger les images statique
 def load_image(num):
-    path = f"images0/{format(num,'06b')}.png"
+    path = f"images1/{format(num,'06b')}.png"
     return pygame.image.load(path).convert_alpha()
 
 def switch_to_num(switchs):
