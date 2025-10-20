@@ -1,6 +1,5 @@
 import gpiozero as gpio
 import pygame
-import cv2
 import time
 
 # Initialisation de pygame
@@ -14,19 +13,10 @@ screen = pygame.display.set_mode(screen_size)
 BUTTONS = [2,3,4,17,27,22]  
 buttons = [gpio.Button(pin, pull_up=True) for pin in BUTTONS]  # Pull-down pour détecter le 3.3V
 
-# Charger les images statiques
-STATIC_IMAGES = []
-for i in range(64):  # de 0 à 63 inclus
-    binaire = format(i, '06b')  # convertit en binaire sur 6 bits
-    name = "images0/" + str(binaire) + ".png"
-    STATIC_IMAGES.append(pygame.image.load(name))
-
-
-def switch_to_string(switchs):
-    img_name=""
-    for switch in switchs:
-        img_name+=str(switch)
-    return img_name
+# Charger les images statique
+def load_image(num):
+    path = f"images0/{format(num,'06b')}.png"
+    return pygame.image.load(path).convert_alpha()
 
 def switch_to_num(switchs):
     sum=0
@@ -67,7 +57,8 @@ try:
                 time.sleep(0.01)  # Anti-rebond
 
         num=switch_to_num(SWITCHS)
-        display_static_image(STATIC_IMAGES[num])
+        img = load_image(num)
+        display_static_image(img)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
